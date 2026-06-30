@@ -1,26 +1,96 @@
-<html><body>
-<!--StartFragment--><html><head></head><body><h1>Dolibarr BatchInvoiceImport</h1><p>Work-in-progress external module for Dolibarr that will allow users to generate customer invoices in batches from spreadsheet data.</p><p>The module is being developed as a standard Dolibarr external module and follows Dolibarr-native conventions wherever possible.</p><h2>Current status</h2><p>This module is currently in early development.</p><p>Implemented so far:</p><ul><li><p>Clean Dolibarr external module scaffold.</p></li><li><p>Module activation in Dolibarr.</p></li><li><p>Basic module landing page.</p></li><li><p>Upload page.</p></li><li><p>File extension validation.</p></li><li><p>CSV header/template validation.</p></li><li><p>XLSX/XLS header validation support through Dolibarr-bundled PhpSpreadsheet, when the local PHP installation has the required extensions enabled.</p></li><li><p>Preview page showing template validation results.</p></li><li><p>Result placeholder page.</p></li><li><p>Spanish and English language files.</p></li><li><p>No invoice creation yet.</p></li><li><p>No database writes yet.</p></li><li><p>No custom SQL tables yet.</p></li></ul><h2>Purpose</h2><p>The final goal of the module is to import an Excel/CSV file where each row represents one customer invoice and each row contains one or more invoice item groups.</p><p>The module will eventually:</p><ol><li><p>Upload a spreadsheet.</p></li><li><p>Validate the spreadsheet structure.</p></li><li><p>Parse invoice rows.</p></li><li><p>Validate customer, VAT, item lines, and totals.</p></li><li><p>Create draft customer invoices using Dolibarr native invoice methods.</p></li><li><p>Show an import result report.</p></li></ol><h2>Development principles</h2><p>This module must follow these rules:</p><ul><li><p>Use Dolibarr native methods, classes, permissions, constants, helpers, and database conventions wherever available.</p></li><li><p>Do not bypass Dolibarr invoice logic.</p></li><li><p>Do not insert directly into native Dolibarr invoice tables such as <code>llx_facture</code> or <code>llx_facturedet</code>.</p></li><li><p>Future invoice creation must use Dolibarr native invoice classes/methods, especially the <code>Facture</code> class.</p></li><li><p>Custom code must be vanilla PHP, vanilla JavaScript, HTML, and CSS.</p></li><li><p>Do not use external frameworks.</p></li><li><p>Do not add external libraries.</p></li><li><p>Do not use Composer dependencies unless they are already included by Dolibarr.</p></li><li><p>Do not use npm, Node, frontend build tools, or JavaScript frameworks.</p></li></ul><h2>Expected spreadsheet format</h2><p>The current client template is in Spanish.</p><p>Each spreadsheet data row represents one customer invoice.</p><h3>Invoice header columns</h3>
-Column | Header
--- | --
-A | CIF/NIF
-B | NOMBRE
-C | FECHA DE FACTURA
-D | IVA GLOBAL
-E | SUBTOTAL FACTURA
-F | TOTAL FACTURA
+# MYMODULE FOR [DOLIBARR ERP & CRM](https://www.dolibarr.org)
 
-<p>The item group may repeat as many times as needed.</p><p>Example:</p><pre><code class="language-text">CANTIDAD | DENOMINACION | TIPO | PRECIO UNITARIO | PRECIO TOTAL
-CANTIDAD | DENOMINACION | TIPO | PRECIO UNITARIO | PRECIO TOTAL
-CANTIDAD | DENOMINACION | TIPO | PRECIO UNITARIO | PRECIO TOTAL
-</code></pre><p>A column named <code>ETC</code> may appear in the sample template only as an indication that more item groups can be added. It is not treated as an import data column.</p><h2>Confirmed business rules</h2><ul><li><p>One row equals one customer invoice.</p></li><li><p><code>CIF/NIF</code> is the reliable customer lookup field.</p></li><li><p><code>NOMBRE</code> is informational only and must not be used as the primary matching field.</p></li><li><p><code>IVA GLOBAL</code> is an integer VAT percentage, for example <code>21</code>, <code>10</code>, <code>4</code>, or <code>0</code>.</p></li><li><p><code>PRECIO UNITARIO</code> is before VAT.</p></li><li><p><code>PRECIO TOTAL</code> is before VAT and must equal <code>CANTIDAD × PRECIO UNITARIO</code>.</p></li><li><p><code>SUBTOTAL FACTURA</code> is the sum of all <code>PRECIO TOTAL</code> values, before VAT.</p></li><li><p><code>TOTAL FACTURA</code> is <code>SUBTOTAL FACTURA</code> plus VAT.</p></li><li><p>Item lines are free-text invoice lines.</p></li><li><p><code>TIPO = 1</code> means service.</p></li><li><p><code>TIPO = 0</code> means product.</p></li><li><p>There is currently no product reference column, so item lines are not linked to existing Dolibarr products/services.</p></li></ul><h2>Local development environment</h2><p>Current development environment:</p><pre><code class="language-text">OS: Windows 11
-Server: XAMPP
-Dolibarr: 24.0.0-beta
-Module path: htdocs/custom/batchinvoiceimport
-</code></pre><p>The local Dolibarr beta version requires the module descriptor to use:</p><pre><code class="language-php">$this-&gt;need_dolibarr_version = array(24, 0, -4);
-</code></pre><p>When targeting a stable Dolibarr 24 final release, this should be changed to:</p><pre><code class="language-php">$this-&gt;need_dolibarr_version = array(24, 0, 0);
-</code></pre><h2>XLSX support note</h2><p>XLSX files require PHP ZIP support because XLSX files are ZIP-based containers.</p><p>In XAMPP, if XLSX parsing is unavailable, enable the PHP zip extension in <code>php.ini</code>:</p><pre><code class="language-ini">extension=zip
-</code></pre><p>Then restart Apache and verify:</p><pre><code class="language-bat">C:\xampp\php\php.exe -m | findstr zip
-</code></pre><p>Expected output:</p><pre><code class="language-text">zip
-</code></pre><h2>Current manual tests</h2><p>The following tests currently pass:</p><ul><li><p>Module can be enabled in Dolibarr.</p></li><li><p>Module setup/about pages load.</p></li><li><p>Landing page loads.</p></li><li><p>Upload page loads.</p></li><li><p>TXT files are rejected.</p></li><li><p>CSV files with the expected headers are accepted.</p></li><li><p>CSV header validation detects repeated 5-column item groups.</p></li><li><p><code>TIPO</code> is correctly expected in each item group.</p></li><li><p><code>ETC</code> is treated as a warning/stop marker, not as an error.</p></li><li><p>Result page clearly states that invoice creation is not implemented yet.</p></li></ul><h2>Roadmap</h2><p>Planned next milestones:</p><ol><li><p>Validate a real client spreadsheet with sample data.</p></li><li><p>Parse invoice rows without creating invoices.</p></li><li><p>Validate customer existence by <code>CIF/NIF</code>.</p></li><li><p>Validate VAT values.</p></li><li><p>Validate item line totals.</p></li><li><p>Validate invoice subtotals and totals.</p></li><li><p>Add preview report for row-level errors and warnings.</p></li><li><p>Create draft customer invoices using Dolibarr <code>Facture</code> methods.</p></li><li><p>Add import result report with links to generated draft invoices.</p></li><li><p>Add import history and duplicate prevention if needed.</p></li></ol><h2>Important safety note</h2><p>This module must never manually insert invoice data into Dolibarr invoice tables.</p><p>Invoice creation must be delegated to Dolibarr’s own business logic so that totals, VAT, numbering, permissions, triggers, and related behaviors remain consistent with Dolibarr.</p><h2>License</h2><p>To be defined.</p></body></html><!--EndFragment-->
-</body>
-</html>
+## Features
+
+Description of the module...
+
+<!--
+![Screenshot mymodule](img/screenshot_mymodule.png?raw=true "MyModule"){imgmd}
+-->
+
+Other external modules are available on [Dolistore.com](https://www.dolistore.com).
+
+## Translations
+
+Translations can be completed manually by editing files in the module directories under `langs`.
+
+<!--
+This module contains also a sample configuration for Transifex, under the hidden directory [.tx](.tx), so it is possible to manage translation using this service.
+
+For more information, see the [translator's documentation](https://wiki.dolibarr.org/index.php/Translator_documentation).
+
+There is a [Transifex project](https://transifex.com/projects/p/dolibarr-module-template) for this module.
+-->
+
+
+## Installation
+
+Prerequisites: You must have Dolibarr ERP & CRM software installed. You can download it from [Dolistore.org](https://www.dolibarr.org).
+You can also get a ready-to-use instance in the cloud from https://saas.dolibarr.org
+
+
+### From the ZIP file and GUI interface
+
+If the module is a ready-to-deploy zip file, so with a name `module_xxx-version.zip` (e.g., when downloading it from a marketplace like [Dolistore](https://www.dolistore.com)),
+go to menu `Home> Setup> Modules> Deploy external module` and upload the zip file.
+
+<!--
+
+Note: If this screen tells you that there is no "custom" directory, check that your setup is correct:
+
+- In your Dolibarr installation directory, edit the `htdocs/conf/conf.php` file and check that following lines are not commented:
+
+    ```php
+    //$dolibarr_main_url_root_alt ...
+    //$dolibarr_main_document_root_alt ...
+    ```
+
+- Uncomment them if necessary (delete the leading `//`) and assign the proper value according to your Dolibarr installation
+
+    For example :
+
+    - UNIX:
+        ```php
+        $dolibarr_main_url_root_alt = '/custom';
+        $dolibarr_main_document_root_alt = '/var/www/Dolibarr/htdocs/custom';
+        ```
+
+    - Windows:
+        ```php
+        $dolibarr_main_url_root_alt = '/custom';
+        $dolibarr_main_document_root_alt = 'C:/My Web Sites/Dolibarr/htdocs/custom';
+        ```
+-->
+
+<!--
+
+### From a GIT repository
+
+Clone the repository in `$dolibarr_main_document_root_alt/mymodule`
+
+```shell
+cd ....../custom
+git clone git@github.com:gitlogin/mymodule.git mymodule
+```
+
+-->
+
+### Final steps
+
+Using your browser:
+
+  - Log into Dolibarr as a super-administrator
+  - Go to "Setup"> "Modules"
+  - You should now be able to find and enable the module
+
+
+
+## Licenses
+
+### Main code
+
+GPLv3 or (at your option) any later version. See file COPYING for more information.
+
+### Documentation
+
+All texts and readme's are licensed under [GFDL](https://www.gnu.org/licenses/fdl-1.3.en.html).

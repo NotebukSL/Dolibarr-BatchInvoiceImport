@@ -1,0 +1,43 @@
+# Translation file
+
+ModuleBatchInvoiceImportName=Importación de facturas por lotes
+ModuleBatchInvoiceImportDesc=Generar facturas de cliente por lotes a partir de datos de una hoja de cálculo
+BatchInvoiceImport=Importación de facturas por lotes
+BatchInvoiceImportSetup=Configuración de importación de facturas por lotes
+BatchInvoiceImportAbout=Acerca de Importación de facturas por lotes
+BatchInvoiceImportArea=Área de importación de facturas por lotes
+BatchInvoiceImportNoSettings=Todavía no se requiere configuración.
+BatchInvoiceImportNotImplemented=La importación de Excel y la creación de facturas todavía no están implementadas.
+BatchInvoiceImportUploadPage=Subir hoja de calculo
+BatchInvoiceImportPreviewPage=Vista previa de plantilla
+BatchInvoiceImportResultPage=Resultado de importacion
+BatchInvoiceImportWorkflowIntro=Este modulo actualmente solo valida la plantilla de la hoja de calculo del cliente. La creacion de facturas todavia no esta implementada.
+BatchInvoiceImportWorkflowUpload=Subir hoja de calculo
+BatchInvoiceImportWorkflowPreview=Validar plantilla y previsualizar datos
+BatchInvoiceImportWorkflowGenerate=Generar facturas borrador
+BatchInvoiceImportWorkflowResult=Revisar resultado
+BatchInvoiceImportPlaceholder=Marcador de posicion
+BatchInvoiceImportUploadIntro=Seleccione un archivo XLSX, XLS o CSV para validar la cabecera/plantilla. Las filas de facturas no se importaran en este paso.
+BatchInvoiceImportUploadRequired=Suba primero una hoja de calculo.
+BatchInvoiceImportUploadAnotherFile=Subir otro archivo
+BatchInvoiceImportValidateTemplate=Validar plantilla
+BatchInvoiceImportHeaderValidation=Validacion de cabecera
+BatchInvoiceImportExpectedValue=Valor esperado
+BatchInvoiceImportDetectedValue=Valor detectado
+BatchInvoiceImportStatusOk=OK
+BatchInvoiceImportStatusWarning=Aviso
+BatchInvoiceImportStatusError=Error
+BatchInvoiceImportUnsupportedExtension=Extension de archivo no admitida. Solo se aceptan archivos XLSX, XLS y CSV.
+BatchInvoiceImportNoFileUploaded=No se subio ningun archivo o el archivo temporal ya no esta disponible.
+BatchInvoiceImportParsingNotAvailable=El analisis de la hoja de calculo no esta disponible para este archivo en la instalacion local de Dolibarr.
+BatchInvoiceImportNoInvoiceCreationYet=La creacion de facturas todavia no esta implementada.
+BatchInvoiceImportEtcWarning=ETC no es una columna de datos y se ignorara.
+BatchInvoiceImportItemGroupsDetected=Grupos de lineas detectados
+BatchInvoiceImportDataRowsDetected=Filas de datos detectadas
+BatchInvoiceImportTipo=Tipo
+BatchInvoiceImportItemType=Tipo de linea
+BatchInvoiceImportTypeService=1 = servicio
+BatchInvoiceImportTypeProduct=0 = producto
+BatchInvoiceImportExpectedItemGroup=Grupo de linea esperado
+BatchInvoiceImportExpectedItemGroupStructure=Grupo de linea de 5 columnas: CANTIDAD / DENOMINACION / TIPO / PRECIO UNITARIO / PRECIO TOTAL
+BatchInvoiceImportItemTypeHelp=Tipo de linea: 1 = servicio, 0 = producto

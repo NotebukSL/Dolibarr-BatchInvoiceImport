@@ -1,0 +1,43 @@
+# Translation file
+
+ModuleBatchInvoiceImportName=Batch Invoice Import
+ModuleBatchInvoiceImportDesc=Generate customer invoices in batches from spreadsheet data
+BatchInvoiceImport=Batch Invoice Import
+BatchInvoiceImportSetup=Batch Invoice Import setup
+BatchInvoiceImportAbout=About Batch Invoice Import
+BatchInvoiceImportArea=Batch Invoice Import area
+BatchInvoiceImportNoSettings=No settings are required yet.
+BatchInvoiceImportNotImplemented=Excel import and invoice creation are not implemented yet.
+BatchInvoiceImportUploadPage=Upload spreadsheet
+BatchInvoiceImportPreviewPage=Template preview
+BatchInvoiceImportResultPage=Import result
+BatchInvoiceImportWorkflowIntro=This module currently validates the client spreadsheet template only. Invoice creation is not implemented yet.
+BatchInvoiceImportWorkflowUpload=Upload spreadsheet
+BatchInvoiceImportWorkflowPreview=Validate template and preview data
+BatchInvoiceImportWorkflowGenerate=Generate draft invoices
+BatchInvoiceImportWorkflowResult=Review result
+BatchInvoiceImportPlaceholder=Placeholder
+BatchInvoiceImportUploadIntro=Select an XLSX, XLS, or CSV file to validate the spreadsheet header/template. Invoice rows will not be imported in this step.
+BatchInvoiceImportUploadRequired=Upload a spreadsheet first.
+BatchInvoiceImportUploadAnotherFile=Upload another file
+BatchInvoiceImportValidateTemplate=Validate template
+BatchInvoiceImportHeaderValidation=Header validation
+BatchInvoiceImportExpectedValue=Expected value
+BatchInvoiceImportDetectedValue=Detected value
+BatchInvoiceImportStatusOk=OK
+BatchInvoiceImportStatusWarning=Warning
+BatchInvoiceImportStatusError=Error
+BatchInvoiceImportUnsupportedExtension=Unsupported file extension. Only XLSX, XLS, and CSV files are accepted.
+BatchInvoiceImportNoFileUploaded=No file was uploaded or the temporary file is no longer available.
+BatchInvoiceImportParsingNotAvailable=Spreadsheet parsing is not available for this file on the local Dolibarr installation.
+BatchInvoiceImportNoInvoiceCreationYet=Invoice creation is not implemented yet.
+BatchInvoiceImportEtcWarning=ETC is not a data column and will be ignored.
+BatchInvoiceImportItemGroupsDetected=Detected item groups
+BatchInvoiceImportDataRowsDetected=Data rows detected
+BatchInvoiceImportTipo=TIPO
+BatchInvoiceImportItemType=Item type
+BatchInvoiceImportTypeService=1 = service
+BatchInvoiceImportTypeProduct=0 = product
+BatchInvoiceImportExpectedItemGroup=Expected item group
+BatchInvoiceImportExpectedItemGroupStructure=5-column item group: CANTIDAD / DENOMINACION / TIPO / PRECIO UNITARIO / PRECIO TOTAL
+BatchInvoiceImportItemTypeHelp=Item type: 1 = service, 0 = product
